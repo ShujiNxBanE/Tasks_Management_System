@@ -12,5 +12,6 @@
         @csrf
         <Button type="submit">Cerrar Sesion</Button>
     </form>
+    <a href="{{ route('task_index') }}">Ir a las Tareas</a>
 </body>
 </html>
