@@ -3,8 +3,16 @@
 </h1>
 
 <form action="{{ route('task_create') }}">
-    <Button type="submit">Crear una nueva Tarea</Button>
+    <button type="submit">Crear una nueva Tarea</button>
 </form>
+
+<a href="{{ route('export_pending_tasks') }}">Exportar tareas pendientes</a>
+
+<a href="{{ route('export_completed_tasks') }}">Exportar tareas completadas</a>
+
+<a href="{{ route('export_progress_tasks') }}">Exportar tareas en progreso</a>
+
+<a href="{{ route('export_all_tasks') }}">Exportar todas las tareas</a>
 
 <ul>
     @foreach ($tasks as $task)
