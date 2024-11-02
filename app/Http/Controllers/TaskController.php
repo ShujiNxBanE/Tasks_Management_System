@@ -56,4 +56,10 @@ class TaskController extends Controller
         $task->delete();
         return redirect()->route('task_index');
     }
+
+    public function show($taskId)
+    {
+        $task = Task::find($taskId);
+        return view('task.show', compact('task'));
+    }
 }

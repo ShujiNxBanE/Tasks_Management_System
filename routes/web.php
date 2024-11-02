@@ -24,6 +24,7 @@ Route::prefix('/tasks')->group(function(){
     Route::get('/index', [TaskController::class, 'index'])->name('task_index');
     Route::get('/create', [TaskController::class, 'create'])->name('task_create');
     Route::get('/store', [TaskController::class, 'store'])->name('create_new_task');
+    Route::get('/{task}/show', [TaskController::class, 'show'])->name('task_show');
     Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('task_edit');
     Route::get('/{task}/update', [TaskController::class, 'update'])->name('task_update');
     Route::delete('/{task}/destroy', [TaskController::class, 'destroy'])->name('task_destroy');
