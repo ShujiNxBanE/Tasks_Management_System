@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::where('user_id', Auth::id())->get();
         return view('task.index', compact('tasks'));
     }
 
@@ -59,7 +59,7 @@ class TaskController extends Controller
 
     public function show($taskId)
     {
-        $task = Task::find($taskId);
+        $task = Task::with('comments')->findOrFail($taskId);
         return view('task.show', compact('task'));
     }
 }

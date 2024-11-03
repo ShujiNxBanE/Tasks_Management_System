@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskExportController;
@@ -19,7 +20,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::prefix('/tasks')->group(function(){
+Route::prefix('/tasks')->middleware('auth')->group(function(){
 
     Route::get('/index', [TaskController::class, 'index'])->name('task_index');
     Route::get('/create', [TaskController::class, 'create'])->name('task_create');
@@ -34,5 +35,12 @@ Route::prefix('/tasks')->group(function(){
     Route::get('/export_progress_tasks', [TaskExportController::class, 'exportProgressTasks'])->name('export_progress_tasks');
     Route::get('/export_all_tasks', [TaskExportController::class, 'exportAllTasks'])->name('export_all_tasks');
 
+});
 
-})->middleware('auth');
+Route::prefix('/comments')->middleware('auth')->group(function(){
+
+    Route::get('/store', [CommentController::class, 'store'])->name('comment_store');
+    Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment_edit');
+    Route::get('/{comment}/update', [CommentController::class, 'update'])->name('comment_update');
+    Route::delete('/{comment}/destroy', [CommentController::class, 'destroy'])->name('comment_destroy');
+});

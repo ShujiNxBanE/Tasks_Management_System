@@ -30,6 +30,6 @@ class RegisterController extends Controller
 
         Auth::login($user); // Inicia sesión automáticamente después del registro
 
-        return redirect()->intended('index'); // Redirige al dashboard o la página de inicio
+        return redirect()->route('task_index'); // Redirige al dashboard o la página de inicio
     }
 }
