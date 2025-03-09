@@ -21,7 +21,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.create');
+Route::post('/create-backup', [BackupController::class, 'createBackup'])->name('create_backup');
 
 Route::prefix('/tasks')->middleware('auth')->group(function(){
 

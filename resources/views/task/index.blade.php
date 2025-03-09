@@ -14,12 +14,6 @@
         <h1 class="text-2xl font-bold text-blue-600">Tareas</h1>
 
         <div class="flex gap-4">
-            <form action="{{ route('backup.create') }}" method="GET">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition">
-                    Crear Backup
-                </button>
-            </form>
-
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">
