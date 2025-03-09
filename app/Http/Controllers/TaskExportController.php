@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -13,7 +14,9 @@ class TaskExportController extends Controller
     public function exportPendingTasks()
     {
         // Obtener tareas pendientes
-        $tasks = Task::where('status', 'pendiente')->get();
+        $tasks = Task::where('status', 'pendiente')
+             ->where('user_id', Auth::id()) // Filtra solo las tareas del usuario autenticado
+             ->get();
 
         // Crear nuevo archivo de Excel
         $spreadsheet = new Spreadsheet();
@@ -78,7 +81,9 @@ class TaskExportController extends Controller
     public function exportCompletedTasks()
     {
         // Obtener tareas pendientes
-        $tasks = Task::where('status', 'completada')->get();
+        $tasks = Task::where('status', 'completada')
+        ->where('user_id', Auth::id()) // Filtra solo las tareas del usuario autenticado
+        ->get();
 
         // Crear nuevo archivo de Excel
         $spreadsheet = new Spreadsheet();
@@ -143,7 +148,9 @@ class TaskExportController extends Controller
     public function exportProgressTasks()
     {
         // Obtener tareas pendientes
-        $tasks = Task::where('status', 'en progreso')->get();
+        $tasks = Task::where('status', 'en progreso')->where('user_id', Auth::id()) // Filtra solo las tareas del usuario autenticado
+        ->get();
+
 
         // Crear nuevo archivo de Excel
         $spreadsheet = new Spreadsheet();
@@ -208,7 +215,7 @@ class TaskExportController extends Controller
     public function exportAllTasks()
     {
         // Obtener tareas pendientes
-        $tasks = Task::all();
+        $tasks = Task::where('user_id', Auth::id())->get();
 
         // Crear nuevo archivo de Excel
         $spreadsheet = new Spreadsheet();
